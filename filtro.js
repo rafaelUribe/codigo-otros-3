@@ -1,5 +1,7 @@
 // Tenemos un li de productos
 
+// del un array de productos tenemos un filtro que toma el valor del input y filtra segun tipo o color segun sea el caso.
+
 const productos = [
   {nombre: "Zapato negro", tipo: "zapato", color: "negro", img: "./taco-negro.jpg"},
   {nombre: "Zapato azul", tipo: "zapato", color: "azul", img: "./taco-azul.jpg"},
@@ -8,24 +10,28 @@ const productos = [
   {nombre: "Zapato rojo", tipo: "zapato", color: "rojo", img: "./zapato-rojo.jpg"}
 ]
 
-const li = document.getElementsByName("lista-de-productos")
+// cambiamos el query selector por get element by id
+const li = document.getElementById("lista-de-productos")
 const $i = document.querySelector('.input');
 
-for (let i = 0; i < productos.length; i++) {
-  var d = document.createElement("div")
-  d.classList.add("producto")
-
-  var ti = document.createElement("p")
-  ti.classList.add("titulo")
-  ti.textContent = productos[i].nombre
+// se genera una funcion para inicializar el display de productos
+const displayProductos = (productos) => {
+  for (let i = 0; i < productos.length; i++) {
+    var d = document.createElement("div")
+    d.classList.add("producto")
   
-  var imagen = document.createElement("img");
-  imagen.setAttribute('src', productos[i].img);
-
-  d.appendChild(ti)
-  d.appendChild(imagen)
-
-  li.appendChild(d)
+    var ti = document.createElement("p")
+    ti.classList.add("titulo")
+    ti.textContent = productos[i].nombre
+    
+    var imagen = document.createElement("img");
+    imagen.setAttribute('src', productos[i].img);
+  
+    d.appendChild(ti)
+    d.appendChild(imagen)
+  
+    li.appendChild(d)
+  }
 }
 
 displayProductos(productos)
@@ -37,8 +43,7 @@ botonDeFiltro.onclick = function() {
   }
 
   const texto = $i.value;
-  console.log(texto);
-  const productosFiltrados = filtrado(productos, texto );
+  const productosFiltrados = filtrado(productos, texto);
 
   for (let i = 0; i < productosFiltrados.length; i++) {
     var d = document.createElement("div")
